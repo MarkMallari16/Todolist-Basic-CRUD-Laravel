@@ -7,6 +7,7 @@ use App\Models\Task;
 
 class TaskController extends Controller
 {
+
     public function index()
     {
         $tasks = Task::all();
@@ -41,6 +42,8 @@ class TaskController extends Controller
         }
 
         session()->flash('success', 'Task updated successfully.');
+
+        
 
         return back();
     }

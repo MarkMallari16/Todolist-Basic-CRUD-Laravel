@@ -15,20 +15,32 @@
 
 <body class="antialiased">
     @section('content')
-    <div class=" w-full h-screen flex flex-row justify-center   bg-slate-200">
+    <div class="w-full h-screen flex flex-row justify-center   bg-indigo-100">
         <div class="w-[600px]">
             <div class="text-center my-4">
                 <h1 class="text-4xl font-black text-indigo-500 font-sans">Basic CRUD Todo List </h1>
-
                 <span class="text-slate-400">by Mark Mallari</span>
             </div>
             @if(session()->has('success'))
-            <div class="flex- p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
-                <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-                </svg>
-                <span class="font-medium">{{session('success')}}</span>
+            <div id="alert-1" class="flex justify-between items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+                <div class="flex items-center">
+                    <div>
+                        <svg class="flex-shrink-0 inline w-5 h-5 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                        </svg>
+                    </div>
+
+                    <div><span class="font-medium">{{session('success')}}</span></div>
+                </div>
+
+                <div class="cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" data-dismiss-target="#alert-1" aria-label="Close">>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+                </div>
             </div>
+
+
             @endif
             @if(session()->has('error'))
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-3" role="alert">
@@ -58,7 +70,7 @@
                 <div class="text-end p-2">
                     <div class="font-bold text-xl">Task:
                         <span class=" text-indigo-500">
-                            @if(count($tasks)  > 0)
+                            @if(count($tasks) > 0)
                             {{count($tasks)}}
 
                             @else
@@ -69,6 +81,14 @@
                 </div>
                 @foreach($tasks as $task)
                 <div class="flex justify-center items-center mb-2 shadow-md bg-white rounded px-8 py-3">
+                    <div>
+                        <button class="bg-emerald-500 p-2 rounded-md text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                                <path fill-rule="evenodd" d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd" />
+                            </svg>
+
+                        </button>
+                    </div>
                     <div class="w-full text-center">
                         {{$task->task_name}}
                     </div>
