@@ -29,3 +29,5 @@ Route::post('add-task', [TaskController::class, 'addTask'])->name('addTask');
 Route::put('update-task/{id}', [TaskController::class, 'updateTask'])->name('updateTask');
 //register delete
 Route::delete('delete-task/{id}', [TaskController::class, 'deleteTask'])->name('deleteTask');
+//done task/or deleting the task
+Route::delete('done-task/{id}',[TaskController::class,'doneTask'])->name('doneTask');

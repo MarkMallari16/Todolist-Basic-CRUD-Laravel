@@ -64,4 +64,17 @@ class TaskController extends Controller
 
         return back();
     }
+    //done task
+    public function doneTask($id){
+        $task = Task::find($id);
+
+        if (!$task){
+            session()->flash('error', 'Task not found.');
+        }
+        $task->delete();
+
+        session()->flash('success','Task marked as done!');
+
+        return back();
+    }
 }

@@ -22,7 +22,7 @@
                 <span class="text-slate-400">by Mark Mallari</span>
             </div>
             @if(session()->has('success'))
-            <div id="alert-1" class="flex justify-between items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+            <div id="alert-1" class="border border-green-400 flex justify-between items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-100 dark:bg-gray-800 dark:text-green-400" role="alert">
                 <div class="flex items-center">
                     <div>
                         <svg class="flex-shrink-0 inline w-5 h-5 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -42,10 +42,30 @@
 
 
             @endif
-            @if(session()->has('error'))
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-3" role="alert">
-                {{ session('error') }}
+            @if($errors->any())
+
+            <div id="alert-1" class="bg-red-100 border border-red-400 flex justify-between items-center p-4 mb-4 text-sm text-red-800 rounded-lg  dark:bg-red-800 dark:text-red-400" role="alert">
+                <div class="flex items-center">
+                    <div>
+                        <svg class="flex-shrink-0 inline w-5 h-5 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                        </svg>
+                    </div>
+
+                    <div><span class="font-medium">
+                            @foreach ($errors->all() as $error)
+                            <div>{{$error}}</div>
+                            @endforeach
+                        </span></div>
+                </div>
+
+                <div class="cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" data-dismiss-target="#alert-1" aria-label="Close">>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+                </div>
             </div>
+
             @endif
             <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <form action="{{route('addTask')}}" class="" method="POST">
@@ -81,14 +101,18 @@
                 </div>
                 @foreach($tasks as $task)
                 <div class="flex justify-center items-center mb-2 shadow-md bg-white rounded px-8 py-3">
-                    <div>
-                        <button class="bg-emerald-500 p-2 rounded-md text-white">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
-                                <path fill-rule="evenodd" d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd" />
-                            </svg>
+                    <form action="{{route('doneTask',$task->id)}}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <div>
+                            <button class="bg-emerald-500 p-2 rounded-md text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                                    <path fill-rule="evenodd" d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd" />
+                                </svg>
 
-                        </button>
-                    </div>
+                            </button>
+                        </div>
+                    </form>
                     <div class="w-full text-center">
                         {{$task->task_name}}
                     </div>
