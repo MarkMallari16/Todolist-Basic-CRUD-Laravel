@@ -68,7 +68,7 @@
 
             @endif
             <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                <form action="{{route('addTask')}}" class="" method="POST">
+                <form action="{{route('addTask')}}"  method="POST">
                     @csrf
                     <div class="flex gap-2">
                         <div class="w-full">

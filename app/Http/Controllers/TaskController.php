@@ -17,7 +17,7 @@ class TaskController extends Controller
     public function addTask(Request $request)
     {
         $request->validate([
-            'taskInput' => 'required',
+            'taskInput' => 'required|min:3',
         ]);
 
         $data = Task::create([
